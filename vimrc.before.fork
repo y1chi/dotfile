@@ -1,4 +1,4 @@
-let g:spf13_bundle_groups=['general', 'neocomplete', 'programming', 'python', 'misc', 'puppet', 'misc', 'go']
+let g:spf13_bundle_groups=['general', 'youcompleteme', 'programming', 'python', 'misc', 'puppet', 'misc', 'go']
 let g:ale_completion_enabled=1
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
