@@ -1,3 +1,0 @@
-UnBundle 'scrooloose/syntastic'
-Bundle 'w0rp/ale'
-Bundle 'rakr/vim-one'
