@@ -13,9 +13,11 @@ scriptencoding utf-8
 
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
+    Plug 'junegunn/rainbow_parentheses.vim'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-repeat'
+    Plug 'tpope/vim-sensible'
     Plug 'scrooloose/nerdtree'
     Plug 'airblade/vim-gitgutter'
     Plug 'majutsushi/tagbar'
@@ -30,6 +32,8 @@ scriptencoding utf-8
     Plug 'plasticboy/vim-markdown'
     Plug 'ericbn/vim-relativize'
     Plug 'rizzatti/dash.vim'
+    " syntax highlighting
+    Plug 'sheerun/vim-polyglot'
 
 
     " color themes
