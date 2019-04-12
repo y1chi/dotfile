@@ -6,8 +6,8 @@ set mouse=a                 " Automatically enable mouse usage
 set mousehide               " Hide the mouse cursor while typing
 scriptencoding utf-8
 
-autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
-        " Always switch to the current file directory
+" autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
+" Always switch to the current file directory
 " plugin installs {
     call plug#begin('~/.vim/plugged')
 
@@ -15,6 +15,7 @@ autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
     Plug 'junegunn/fzf.vim'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-repeat'
     Plug 'scrooloose/nerdtree'
     Plug 'airblade/vim-gitgutter'
     Plug 'majutsushi/tagbar'
@@ -28,6 +29,7 @@ autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     Plug 'plasticboy/vim-markdown'
     Plug 'ericbn/vim-relativize'
+    Plug 'rizzatti/dash.vim'
 
 
     " color themes
@@ -142,24 +144,18 @@ set background=dark
 		endif
     " }
     " Nerd Commender {
-     " Add spaces after comment delimiters by default
+        " Add spaces after comment delimiters by default
         let g:NERDSpaceDelims = 1
-
         " Use compact syntax for prettified multi-line comments
         let g:NERDCompactSexyComs = 1
-
         " Align line-wise comment delimiters flush left instead of following code indentation
         let g:NERDDefaultAlign = 'left'
-
         " Set a language to use its alternate delimiters by default
         let g:NERDAltDelims_java = 1
-
         " Add your own custom formats or override the defaults
         let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
-
         " Allow commenting and inverting empty lines (useful when commenting a region)
         let g:NERDCommentEmptyLines = 1
-
         " Enable trimming of trailing whitespace when uncommenting
         let g:NERDTrimTrailingWhitespace = 1
     " }
@@ -169,6 +165,39 @@ set background=dark
         nnoremap <silent> <F3> :let [&number, &relativenumber] =
           \ [!&number && (g:relativize_with_number \|\| !g:relativize_enabled),
           \ !&relativenumber && g:relativize_enabled]<CR>
+    " }
+
+    " dash {
+        :nmap <silent> <leader>d <Plug>DashSearch
+        let g:dash_map = {
+                \ 'java' : ['android', 'java'],
+                \ 'python': ['python'],
+                \ 'go': ['go'],
+                \ }
+    " }
+
+    " FZF {
+        nmap <Leader>f :Files<CR>
+        nmap <Leader>t :Tags<CR>
+        command! -bang -nargs=* Ag
+          \ call fzf#vim#ag(<q-args>,
+          \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+          \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+          \                 <bang>0)
+        let g:fzf_colors =
+		\ { 'fg':      ['fg', 'Normal'],
+          \ 'bg':      ['bg', 'Normal'],
+          \ 'hl':      ['fg', 'Comment'],
+          \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+          \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+          \ 'hl+':     ['fg', 'Statement'],
+          \ 'info':    ['fg', 'PreProc'],
+          \ 'border':  ['fg', 'Ignore'],
+          \ 'prompt':  ['fg', 'Conditional'],
+          \ 'pointer': ['fg', 'Exception'],
+          \ 'marker':  ['fg', 'Keyword'],
+          \ 'spinner': ['fg', 'Label'],
+          \ 'header':  ['fg', 'Comment'] }
     " }
 " }
 "
@@ -185,5 +214,4 @@ set background=dark
         let @/=_s
         call cursor(l, c)
     endfunction
-" }
 " }
