@@ -34,6 +34,8 @@ scriptencoding utf-8
     Plug 'rizzatti/dash.vim'
     " syntax highlighting
     Plug 'sheerun/vim-polyglot'
+    " easy paste
+    Plug 'roxma/vim-paste-easy'
 
 
     " color themes
@@ -188,6 +190,8 @@ set background=dark
           \                 <bang>0 ? fzf#vim#with_preview('up:60%')
           \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
           \                 <bang>0)
+        command! -bang -nargs=? -complete=dir Files
+          \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
         let g:fzf_colors =
 		\ { 'fg':      ['fg', 'Normal'],
           \ 'bg':      ['bg', 'Normal'],
