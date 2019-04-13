@@ -85,7 +85,7 @@ set background=dark
 " }
 
 " Key (re)Mappings {
-	let mapleader = ','
+	let mapleader = " "
 	cmap w!! w !sudo tee % >/dev/null	" really save a file when forgetting sudo
 	" move in visual line instead of file line
 	noremap j gj
@@ -201,6 +201,8 @@ set background=dark
           \   <bang>0)
         nnoremap <silent> <Leader>// :Rg <C-R><C-W><CR>
         vnoremap <silent> <Leader>// y:Rg <C-R>"<CR>
+
+        nnoremap <silent> <S-f> :FZF<CR>
 
         let g:fzf_colors =
 		\ { 'fg':      ['fg', 'Normal'],
