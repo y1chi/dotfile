@@ -5,6 +5,7 @@ syntax on                   " Syntax highlighting
 set mouse=a                 " Automatically enable mouse usage
 set mousehide               " Hide the mouse cursor while typing
 scriptencoding utf-8
+set selection=exclusive
 
 " autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
 " Always switch to the current file directory
@@ -198,6 +199,8 @@ set background=dark
           \   <bang>0 ? fzf#vim#with_preview('up:60%')
           \           : fzf#vim#with_preview('right:50%:hidden', '?'),
           \   <bang>0)
+        nnoremap <silent> <Leader>// :Rg <C-R><C-W><CR>
+        vnoremap <silent> <Leader>// y:Rg <C-R>"<CR>
 
         let g:fzf_colors =
 		\ { 'fg':      ['fg', 'Normal'],
