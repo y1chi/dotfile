@@ -33,11 +33,11 @@ set selection=exclusive
     Plug 'plasticboy/vim-markdown'
     Plug 'ericbn/vim-relativize'
     Plug 'rizzatti/dash.vim'
+    Plug 'mhinz/vim-startify'
     " syntax highlighting
     Plug 'sheerun/vim-polyglot'
     " easy paste
     Plug 'roxma/vim-paste-easy'
-
 
     " color themes
     Plug 'rakr/vim-one'
@@ -182,6 +182,9 @@ set background=dark
                 \ 'go': ['go'],
                 \ }
     " }
+    " Startify {
+        let g:startify_change_to_vcs_root = 1
+    " }
 
     " FZF {
         nmap <Leader>f :Files<CR>
@@ -202,7 +205,7 @@ set background=dark
         nnoremap <silent> <Leader>// :Rg <C-R><C-W><CR>
         vnoremap <silent> <Leader>// y:Rg <C-R>"<CR>
 
-        nnoremap <silent> <S-f> :FZF<CR>
+        nnoremap <silent> <C-f> :FZF<CR>
 
         let g:fzf_colors =
 		\ { 'fg':      ['fg', 'Normal'],
