@@ -4,8 +4,10 @@ filetype plugin indent on   " Automatically detect file types.
 syntax on                   " Syntax highlighting
 set mouse=a                 " Automatically enable mouse usage
 set mousehide               " Hide the mouse cursor while typing
+set noshowmode
 scriptencoding utf-8
 set selection=exclusive
+set completeopt=longest,menuone
 
 " autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
 " Always switch to the current file directory
@@ -27,6 +29,7 @@ set selection=exclusive
     Plug 'scrooloose/nerdcommenter'
     Plug 'w0rp/ale'
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'Shougo/echodoc.vim'
     Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
     Plug 'deoplete-plugins/deoplete-jedi'
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -41,6 +44,12 @@ set selection=exclusive
 
     " color themes
     Plug 'rakr/vim-one'
+
+    " snippet
+    Plug 'SirVer/ultisnips'
+    Plug 'honza/vim-snippets'
+
+    Plug 'jiangmiao/auto-pairs'
 
     call plug#end()
 " }
@@ -123,15 +132,18 @@ set background=dark
 
     " ale {
         let g:ale_fix_on_save = 1
-        let g:airline#extensions#ale#enabled = 1
+        let g:ale_lint_on_text_changed = 'normal'
+        let g:ale_set_loclist = 1
+        let g:airline#extensions#ale#enabled = 0
+        let g:ale_sign_column_always = 1
         let g:ale_fixers = {
         \   '*': ['remove_trailing_lines', 'trim_whitespace'],
         \   'javascript': ['eslint'],
-        \   'python': ['yapf'],
+        \   'python': ['yapf', 'isort'],
         \}
     " }
 
-    " deopelete {
+    " deoplete {
         " deoplete tab-complete
         inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
@@ -140,7 +152,16 @@ set background=dark
         highlight PmenuSel ctermbg=White guifg=#dddd00 guibg=#1f82cd
         highlight PmenuSbar ctermbg=Blue guibg=#d6d6d6
     " }
-    "
+
+    " snippet {
+        let g:UltiSnipsExpandTrigger="<c-s>"
+        let g:UltiSnipsJumpForwardTrigger="<S-tab>"
+        let g:UltiSnipsJumpBackwardTrigger="<c-p>"
+
+        " If you want :UltiSnipsEdit to split your window.
+        let g:UltiSnipsEditSplit="vertical"
+    " }
+
     " one color scheme {
         let g:one_allow_italics = 1
 		"For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
@@ -150,6 +171,7 @@ set background=dark
 			  set termguicolors
 		endif
     " }
+
     " Nerd Commender {
         " Add spaces after comment delimiters by default
         let g:NERDSpaceDelims = 1
@@ -182,6 +204,7 @@ set background=dark
                 \ 'go': ['go'],
                 \ }
     " }
+
     " Startify {
         let g:startify_change_to_vcs_root = 1
     " }
@@ -222,8 +245,11 @@ set background=dark
           \ 'spinner': ['fg', 'Label'],
           \ 'header':  ['fg', 'Comment'] }
     " }
+    " auto pair {
+        let g:AutoPairsFlyMode = 0
+    " }
 " }
-"
+
 " Functions {
 "   Strip whitespace {
     function! StripTrailingWhitespace()
