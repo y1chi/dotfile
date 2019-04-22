@@ -101,46 +101,36 @@ set background=dark
 	noremap k gk
 	" Find merge conflict markers
 	map <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
-
-
 " }
 
 " Plugins {
-    " vim-airline {
-        " Set configuration options for the statusline plugin vim-airline.
-        " Use the powerline theme and optionally enable powerline symbols.
-        " To use the symbols , , , , , , and .in the statusline
-        " segments add the following to your .vimrc.before.local file:
-        "   let g:airline_powerline_fonts=1
-        " If the previous symbols do not render for you then install a
-        " powerline enabled font.
-
-        " See `:echo g:airline_theme_map` for some more choices
-        " Default in terminal vim is 'dark'
-        let g:airline_powerline_fonts = 1
-        if isdirectory(expand("~/.vim/plugged/vim-airline-themes/"))
-            if !exists('g:airline_theme')
-                let g:airline_theme = 'molokai'
-            endif
-            if !exists('g:airline_powerline_fonts')
-                " Use the default set of separators with a few customizations
-                let g:airline_left_sep=''  " Slightly fancier than '>'
-                let g:airline_right_sep='' " Slightly fancier than '<'
-            endif
-        endif
-    " }
 
     " ale {
         let g:ale_fix_on_save = 1
         let g:ale_lint_on_text_changed = 'normal'
         let g:ale_set_loclist = 1
         let g:airline#extensions#ale#enabled = 0
+        let g:ale_sign_error = '⤫'
+        let g:ale_sign_warning = '⚠'
         let g:ale_sign_column_always = 1
         let g:ale_fixers = {
         \   '*': ['remove_trailing_lines', 'trim_whitespace'],
         \   'javascript': ['eslint'],
         \   'python': ['yapf', 'isort'],
         \}
+    " }
+
+    " auto pair {
+        let g:AutoPairsFlyMode = 0
+    " }
+
+    " dash {
+        :nmap <silent> <leader>d <Plug>DashSearch
+        let g:dash_map = {
+                \ 'java' : ['android', 'java'],
+                \ 'python': ['python'],
+                \ 'go': ['go'],
+                \ }
     " }
 
     " deoplete {
@@ -153,60 +143,8 @@ set background=dark
         highlight PmenuSbar ctermbg=Blue guibg=#d6d6d6
     " }
 
-    " snippet {
-        let g:UltiSnipsExpandTrigger="<c-s>"
-        let g:UltiSnipsJumpForwardTrigger="<S-tab>"
-        let g:UltiSnipsJumpBackwardTrigger="<c-p>"
-
-        " If you want :UltiSnipsEdit to split your window.
-        let g:UltiSnipsEditSplit="vertical"
-    " }
-
-    " one color scheme {
-        let g:one_allow_italics = 1
-		"For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-		"Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-		" < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-		if (has("termguicolors"))
-			  set termguicolors
-		endif
-    " }
-
-    " Nerd Commender {
-        " Add spaces after comment delimiters by default
-        let g:NERDSpaceDelims = 1
-        " Use compact syntax for prettified multi-line comments
-        let g:NERDCompactSexyComs = 1
-        " Align line-wise comment delimiters flush left instead of following code indentation
-        let g:NERDDefaultAlign = 'left'
-        " Set a language to use its alternate delimiters by default
-        let g:NERDAltDelims_java = 1
-        " Add your own custom formats or override the defaults
-        let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
-        " Allow commenting and inverting empty lines (useful when commenting a region)
-        let g:NERDCommentEmptyLines = 1
-        " Enable trimming of trailing whitespace when uncommenting
-        let g:NERDTrimTrailingWhitespace = 1
-    " }
-
-    " relativize {
-        nnoremap <silent> <F2> :RelativizeToggle<CR>
-        nnoremap <silent> <F3> :let [&number, &relativenumber] =
-          \ [!&number && (g:relativize_with_number \|\| !g:relativize_enabled),
-          \ !&relativenumber && g:relativize_enabled]<CR>
-    " }
-
-    " dash {
-        :nmap <silent> <leader>d <Plug>DashSearch
-        let g:dash_map = {
-                \ 'java' : ['android', 'java'],
-                \ 'python': ['python'],
-                \ 'go': ['go'],
-                \ }
-    " }
-
-    " Startify {
-        let g:startify_change_to_vcs_root = 1
+    " echodoc {
+        let g:echodoc#enable_at_startup = 1
     " }
 
     " FZF {
@@ -245,8 +183,76 @@ set background=dark
           \ 'spinner': ['fg', 'Label'],
           \ 'header':  ['fg', 'Comment'] }
     " }
-    " auto pair {
-        let g:AutoPairsFlyMode = 0
+
+    " one color scheme {
+        let g:one_allow_italics = 1
+		"For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+		"Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+		" < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+		if (has("termguicolors"))
+			  set termguicolors
+		endif
+    " }
+
+    " snippet {
+        let g:UltiSnipsExpandTrigger="<c-s>"
+        let g:UltiSnipsJumpForwardTrigger="<S-tab>"
+        let g:UltiSnipsJumpBackwardTrigger="<c-p>"
+
+        " If you want :UltiSnipsEdit to split your window.
+        let g:UltiSnipsEditSplit="vertical"
+    " }
+
+    " Nerd Commender {
+        " Add spaces after comment delimiters by default
+        let g:NERDSpaceDelims = 1
+        " Use compact syntax for prettified multi-line comments
+        let g:NERDCompactSexyComs = 1
+        " Align line-wise comment delimiters flush left instead of following code indentation
+        let g:NERDDefaultAlign = 'left'
+        " Set a language to use its alternate delimiters by default
+        let g:NERDAltDelims_java = 1
+        " Add your own custom formats or override the defaults
+        let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+        " Allow commenting and inverting empty lines (useful when commenting a region)
+        let g:NERDCommentEmptyLines = 1
+        " Enable trimming of trailing whitespace when uncommenting
+        let g:NERDTrimTrailingWhitespace = 1
+    " }
+
+    " relativize {
+        nnoremap <silent> <F2> :RelativizeToggle<CR>
+        nnoremap <silent> <F3> :let [&number, &relativenumber] =
+          \ [!&number && (g:relativize_with_number \|\| !g:relativize_enabled),
+          \ !&relativenumber && g:relativize_enabled]<CR>
+    " }
+
+    " Startify {
+        let g:startify_change_to_vcs_root = 1
+    " }
+
+    " vim-airline {
+        " Set configuration options for the statusline plugin vim-airline.
+        " Use the powerline theme and optionally enable powerline symbols.
+        " To use the symbols , , , , , , and .in the statusline
+        " segments add the following to your .vimrc.before.local file:
+        "   let g:airline_powerline_fonts=1
+        " If the previous symbols do not render for you then install a
+        " powerline enabled font.
+
+        " See `:echo g:airline_theme_map` for some more choices
+        " Default in terminal vim is 'dark'
+        let g:airline_powerline_fonts = 1
+        if isdirectory(expand("~/.vim/plugged/vim-airline-themes/"))
+            if !exists('g:airline_theme')
+                let g:airline_theme = 'molokai'
+            endif
+            if !exists('g:airline_powerline_fonts')
+                " Use the default set of separators with a few customizations
+                let g:airline_left_sep=''  " Slightly fancier than '>'
+                let g:airline_right_sep='' " Slightly fancier than '<'
+            endif
+        endif
     " }
 " }
 
