@@ -50,6 +50,7 @@ set completeopt=longest,menuone
     Plug 'honza/vim-snippets'
 
     Plug 'jiangmiao/auto-pairs'
+    Plug 'ludovicchabant/vim-gutentags'
 
     call plug#end()
 " }
@@ -109,7 +110,6 @@ set background=dark
         let g:ale_fix_on_save = 1
         let g:ale_lint_on_text_changed = 'normal'
         let g:ale_set_loclist = 1
-        let g:airline#extensions#ale#enabled = 0
         let g:ale_sign_error = '⤫'
         let g:ale_sign_warning = '⚠'
         let g:ale_sign_column_always = 1
@@ -183,6 +183,9 @@ set background=dark
           \ 'spinner': ['fg', 'Label'],
           \ 'header':  ['fg', 'Comment'] }
     " }
+    " gutentags {
+        let g:gutentags_ctags_tagfile = '.git/tags'
+    " }
 
     " one color scheme {
         let g:one_allow_italics = 1
@@ -243,6 +246,8 @@ set background=dark
         " See `:echo g:airline_theme_map` for some more choices
         " Default in terminal vim is 'dark'
         let g:airline_powerline_fonts = 1
+        let g:airline#extensions#ale#enabled = 0
+        let g:airline#extensions#gutentags#enabled = 1
         if isdirectory(expand("~/.vim/plugged/vim-airline-themes/"))
             if !exists('g:airline_theme')
                 let g:airline_theme = 'molokai'
