@@ -50,7 +50,7 @@ set completeopt=longest,menuone
     Plug 'honza/vim-snippets'
 
     Plug 'jiangmiao/auto-pairs'
-    Plug 'ludovicchabant/vim-gutentags'
+    " Plug 'ludovicchabant/vim-gutentags'
 
     call plug#end()
 " }
@@ -184,7 +184,7 @@ set background=dark
           \ 'header':  ['fg', 'Comment'] }
     " }
     " gutentags {
-        let g:gutentags_ctags_tagfile = '.git/tags'
+        " let g:gutentags_ctags_tagfile = '.git/tags'
     " }
 
     " one color scheme {
