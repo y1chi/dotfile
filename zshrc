@@ -1,5 +1,7 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/zhangyichi/.oh-my-zsh
+export ZSH=/Users/zyichi/.oh-my-zsh
+export PATH=/Users/zyichi/Library/Python/2.7/bin:$PATH
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -87,3 +89,13 @@ alias vim=nvim
 alias cat=bat
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+(( $+commands[gcertstatus] )) && (gcertstatus -ssh_cert_comment="corp/normal" -check_remaining=$((8 * 60 * 60))s || gcert)
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/zyichi/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/zyichi/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/zyichi/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/zyichi/google-cloud-sdk/completion.zsh.inc'; fi
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
