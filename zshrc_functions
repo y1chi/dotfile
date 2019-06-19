@@ -1,0 +1,13 @@
+j() {
+      if [[ "$#" -ne 0 ]]; then
+          cd "$(autojump $@)"
+          return
+      fi
+      local dir="$(autojump -s |
+          sed '/_____/Q; s,'${HOME}',~,' |
+          sort -n -k1,1 -r |
+          fzf --height 40% --reverse --inline-info |
+          sed 's/^[0-9,.:]*\s*//')"
+      cd "$(eval echo $dir)"
+    }
+
