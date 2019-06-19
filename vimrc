@@ -50,6 +50,8 @@ set completeopt=longest,menuone
     " color themes
     Plug 'rakr/vim-one'
 
+    Plug 'janko/vim-test'
+
     Plug 'jiangmiao/auto-pairs'
     " Plug 'ludovicchabant/vim-gutentags'
     " Plug 'prabirshrestha/async.vim'
